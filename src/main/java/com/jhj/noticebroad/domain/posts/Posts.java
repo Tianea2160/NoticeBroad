@@ -1,5 +1,6 @@
 package com.jhj.noticebroad.domain.posts;
 
+import com.jhj.noticebroad.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id//pk
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -90,5 +91,18 @@ class PostRepositoryTest {
 
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
+    }
+    @Test
+    void AuditingTest() {
+        LocalDateTime now = LocalDateTime.now();
+
+        Posts savedPosts = postRepository.save(
+          Posts.builder()
+                  .content("content")
+                  .author("author")
+                  .title("title").build()
+        );
+
+        assertThat(savedPosts.getCreateDate()).isAfter(now);
     }
 }
