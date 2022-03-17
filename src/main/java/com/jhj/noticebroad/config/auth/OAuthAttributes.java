@@ -26,8 +26,8 @@ public class OAuthAttributes {
 
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
-        if(registrationId.equals("Naver")){
-            return ofNaver(userNameAttributeName, attributes);
+        if(registrationId.equals("naver")){
+            return ofNaver("id", attributes);
         }
 
         return ofGoogle(userNameAttributeName, attributes);
@@ -49,11 +49,13 @@ public class OAuthAttributes {
         //naver 에서는 json으로 정보를 반환한다. 따라서 자바에서는 이를 사용하기 위해서 Map을 사용하는데 데이터에 접근을 할때 response라는 필드를 통해서
         //원하는 정보를 찾는다.
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
-                .picture((String) response.get("profileImage"))
-                .attributes(attributes)
+                // profile-image 깃헙에서는 아래와 같이 되어 있는데 책에서는 profileImage라고 키가 설정되어 있다. 나중에 문제 생기면 검토 필요
+                .picture((String) response.get("profile-image"))
+                .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }

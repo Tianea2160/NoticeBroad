@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //책에서는 RunWith(SpringBoot.class)를 사용했지만 JUnit5 부터는 지원을 하지않아서 다른 코드를 사용
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
 class HelloControllerTest {
     //spring mvc에 대해서 get post 등의 http method 테스트를 가능하게 해준다.
     @Autowired
