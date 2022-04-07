@@ -7,6 +7,8 @@ import com.jhj.noticebroad.dto.PostsRequestSaveDto;
 import com.jhj.noticebroad.dto.PostsResponseDto;
 import com.jhj.noticebroad.dto.PostsUpdateRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,4 +59,9 @@ public class PostsService {
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public Page<Posts> findPage(Pageable pageable){
+        return postRepository.findAll(pageable);
+    }
+
 }
